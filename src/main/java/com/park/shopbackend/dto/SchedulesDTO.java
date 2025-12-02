@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
 public class SchedulesDTO {
     private Long id;
     private String username;
-    private Long productId;
-    private String productName;
-    private Integer productPrice;
-    private Integer quantity;
-    private LocalDateTime purchaseTime;
+    private String title;
+    private String description;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private boolean active;
 }

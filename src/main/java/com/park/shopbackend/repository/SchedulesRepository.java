@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface SchedulesRepository extends JpaRepository<Schedules, Long> {
-    @Query("select pur from Schedules pur where pur.user.username=:username")
-    List<Schedules> findAllByPurchaseUSer(String username);
+    @Query("select s from Schedules s where s.user.username=:username")
+    List<Schedules> findAllBySchedulesUser(String username);
 }
