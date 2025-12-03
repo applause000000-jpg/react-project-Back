@@ -10,6 +10,7 @@ public interface SchedulesService {
 
 
     SchedulesDTO saveSchedules(SchedulesDTO schedulesDTO);
+    SchedulesDTO updateSchedule(Long scheduleId,SchedulesDTO schedulesDTO);
     List<SchedulesDTO> findSchedulesUser(String username);
     List<SchedulesDTO> findSchedulesAll();
     void deleteSchedules(Long id);

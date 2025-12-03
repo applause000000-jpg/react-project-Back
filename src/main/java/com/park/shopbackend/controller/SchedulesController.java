@@ -19,21 +19,28 @@ public class SchedulesController {
     private final SchedulesService schedulesService;
 
     @PostMapping
-    public ResponseEntity<Object> savePurchases(@RequestBody SchedulesDTO purchasesDTO){
-        log.info("savePurchases"+purchasesDTO);
-        return new ResponseEntity<>(schedulesService.saveSchedules(purchasesDTO),
+    public ResponseEntity<Object> savePurchases(@RequestBody SchedulesDTO schedulesDTO){
+        return new ResponseEntity<>(schedulesService.saveSchedules(schedulesDTO),
                 HttpStatus.CREATED);
     }
     @GetMapping
-    public ResponseEntity<Object> getAllPurchasesOfUser(@AuthenticationPrincipal
+    public ResponseEntity<Object> getAllSchedulesOfUser(@AuthenticationPrincipal
                                                         UserPrincipal userPrinciple){
         return ResponseEntity.ok(schedulesService.findSchedulesUser(
                 userPrinciple.getUsername()));
     }
 
-//    @DeleteMapping("{productId}")
-//    public ResponseEntity<Object> delteProduct(@PathVariable Long productId){
-//        productService.deleteProduct(productId);
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
+    @DeleteMapping("{scheduleId}")
+    public ResponseEntity<Object> deleteSchedules(@PathVariable Long scheduleId){
+        schedulesService.deleteSchedules(scheduleId);
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping("{scheduleId}")
+    public ResponseEntity<SchedulesDTO> updateSchedules(@PathVariable Long scheduleId,
+                                                        @RequestBody SchedulesDTO schedulesDTO) {
+        SchedulesDTO updated = schedulesService.updateSchedule(scheduleId, schedulesDTO);
+        return ResponseEntity.ok(updated);
+    }
+
+
 }
