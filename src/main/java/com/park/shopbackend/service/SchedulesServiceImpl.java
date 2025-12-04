@@ -11,7 +11,9 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,10 @@ public class SchedulesServiceImpl implements SchedulesService {
     @Override
     public SchedulesDTO saveSchedules(SchedulesDTO schedulesDTO) {
         Schedules schedules = dtoToEntity(schedulesDTO);
+        if (schedules.getStartDate() != null) {
+            schedules.setStartDate(schedules.getStartDate().plusHours(9));
+        }
+
 
         User user = userRepository.findByUsername(schedulesDTO.getUsername());
         schedules.setUser(user);
@@ -53,7 +59,12 @@ public class SchedulesServiceImpl implements SchedulesService {
 
     @Override
     public List<SchedulesDTO> findSchedulesUser(String username) {
-        List<Schedules> schedules = schedulesRepository.findAllBySchedulesUser(username);
+
+        User user = userRepository.findByUsername(username);
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        System.out.println(user.getUsername()+user.getId());
+        System.out.println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
+        List<Schedules> schedules = schedulesRepository.findByUser(user);
         schedules.forEach(s->s.updateActiveStatus(LocalDateTime.now()));
         List<SchedulesDTO> dtos = new ArrayList<>();
         for (Schedules schedule : schedules) {

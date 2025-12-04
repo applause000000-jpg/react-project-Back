@@ -10,18 +10,25 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 @Log4j2
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/Schedules")
+@RequestMapping("/api/schedules")
 @CrossOrigin(origins = "*")
 public class SchedulesController {
     private final SchedulesService schedulesService;
 
     @PostMapping
     public ResponseEntity<Object> savePurchases(@RequestBody SchedulesDTO schedulesDTO){
-        return new ResponseEntity<>(schedulesService.saveSchedules(schedulesDTO),
-                HttpStatus.CREATED);
+
+        return new ResponseEntity<>(
+                schedulesService.saveSchedules(schedulesDTO),
+                HttpStatus.CREATED
+        );
+
     }
     @GetMapping
     public ResponseEntity<Object> getAllSchedulesOfUser(@AuthenticationPrincipal
