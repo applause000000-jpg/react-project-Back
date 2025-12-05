@@ -11,9 +11,7 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +30,7 @@ public class SchedulesServiceImpl implements SchedulesService {
         Schedules schedules = dtoToEntity(schedulesDTO);
         if (schedules.getStartDate() != null) {
             schedules.setStartDate(schedules.getStartDate().plusHours(9));
+            schedules.setEndDate(schedules.getEndDate().plusHours(9));
         }
 
 
