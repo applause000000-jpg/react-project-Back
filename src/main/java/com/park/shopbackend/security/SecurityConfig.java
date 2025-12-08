@@ -1,6 +1,5 @@
 package com.park.shopbackend.security;
 
-import com.park.shopbackend.domain.Role;
 import com.park.shopbackend.security.jwt.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -51,8 +50,9 @@ public class SecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authz ->authz
                         .requestMatchers("/api/authentication/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/product/**").permitAll()
-                        .requestMatchers("/api/product/**").hasRole(Role.ADMIN.name())
+                        .requestMatchers(HttpMethod.GET, "/api/schedules/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").permitAll()
+//                        .requestMatchers("/api/product/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
         return http.build();

@@ -10,9 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 @Log4j2
 @RestController
 @RequiredArgsConstructor
@@ -37,12 +34,12 @@ public class SchedulesController {
                 userPrinciple.getUsername()));
     }
 
-    @DeleteMapping("{scheduleId}")
+    @DeleteMapping("/{scheduleId}")
     public ResponseEntity<Object> deleteSchedules(@PathVariable Long scheduleId){
         schedulesService.deleteSchedules(scheduleId);
         return ResponseEntity.noContent().build();
     }
-    @PutMapping("{scheduleId}")
+    @PutMapping("/{scheduleId}")
     public ResponseEntity<SchedulesDTO> updateSchedules(@PathVariable Long scheduleId,
                                                         @RequestBody SchedulesDTO schedulesDTO) {
         SchedulesDTO updated = schedulesService.updateSchedule(scheduleId, schedulesDTO);
