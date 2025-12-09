@@ -48,8 +48,8 @@ public class SchedulesServiceImpl implements SchedulesService {
         // DTO 값으로 엔티티 업데이트
         schedule.setTitle(dto.getTitle());
         schedule.setDescription(dto.getDescription());
-        schedule.setStartDate(dto.getStartDate());
-        schedule.setEndDate(dto.getEndDate());
+        schedule.setStartDate(dto.getStartDate().plusHours(9));
+        schedule.setEndDate(dto.getEndDate().plusHours(9));
         schedule.setActive(dto.isActive());
 
         Schedules updated = schedulesRepository.save(schedule);

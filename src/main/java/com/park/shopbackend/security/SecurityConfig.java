@@ -52,6 +52,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/authentication/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/schedules/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/api/schedules/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/api/schedules/**").permitAll()
 //                        .requestMatchers("/api/product/**").hasRole(Role.ADMIN.name())
                         .anyRequest().authenticated())
                 .addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
